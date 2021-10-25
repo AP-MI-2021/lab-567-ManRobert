@@ -1,21 +1,15 @@
 def creeaza_rezervare(id, nume, clasa, pret, checkin):
     """
-    Functia creeaza un dictionar ce contine detaliile unei rezervari de zbor la o companie aeriana
+    Functia creeaza o lista ce contine detaliile unei rezervari de zbor la o companie aeriana
     :param id: string
     :param nume: string
     :param clasa: string
     :param pret: float
     :param checkin: string
-    :return: dictionarul cu detaliile
+    :return: lista cu detaliile
     """
 
-    return {
-        "id": id,
-        "nume": nume,
-        "clasa": clasa,
-        "pret": pret,
-        "checkin": checkin
-    }
+    return [id, nume, clasa, pret, checkin]
 
 
 def get_id(rezervare):
@@ -25,7 +19,7 @@ def get_id(rezervare):
     :return: id-ul rezervarii
     """
 
-    return rezervare["id"]
+    return rezervare[0]
 
 
 def get_nume(rezervare):
@@ -35,7 +29,7 @@ def get_nume(rezervare):
     :return: numele unei rezervari
     """
 
-    return rezervare["nume"]
+    return rezervare[1]
 
 
 def get_clasa(rezervare):
@@ -45,7 +39,7 @@ def get_clasa(rezervare):
     :return: clasa unei rezervari
     """
 
-    return rezervare["clasa"]
+    return rezervare[2]
 
 
 def get_pret(rezervare):
@@ -55,7 +49,7 @@ def get_pret(rezervare):
     :return: pretul unei rezervari
     """
 
-    return rezervare["pret"]
+    return rezervare[3]
 
 
 def get_checkin(rezervare):
@@ -65,7 +59,7 @@ def get_checkin(rezervare):
     :return: da/nu (ca si string)
     """
 
-    return rezervare["checkin"]
+    return rezervare[4]
 
 
 def get_all(rezervare):
