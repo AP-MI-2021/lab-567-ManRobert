@@ -1,5 +1,3 @@
-# lab-567-ManRobert
-lab-567-ManRobert created by GitHub Classroom
 Fiecare student își calculează problema asignată astfel: 1 + cod % 4, unde cod este codul vostru din lista de note - cereți codul cadrului didactic de la laborator dacă nu îl știți deja. De exemplu, pentru codul 1235 problema asginată este 1 + 1235 % 4 = 1 + 3 = 4.
 
 Toate problemele trebuie să aibă un meniu și o posibilitate de a vizualiza toate datele existente (show all).
