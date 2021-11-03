@@ -32,4 +32,3 @@ def test_modifica_rezervare():
     assert get_nume(get_by_id("1", lista)) == "Mihai"
     assert get_pret(get_by_id("1", lista)) == 210
     assert get_checkin(get_by_id("1", lista)) == "Da"
-

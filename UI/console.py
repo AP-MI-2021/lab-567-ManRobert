@@ -1,5 +1,6 @@
 from Domain.rezervare import to_string
 from Logic.CRUD import adauga_rezervare, sterge_rezervare, modifica_rezervare
+from Logic.afisare_suma_preturilor_fiecare_nume import afisare_suma_preturilor_fiecare_nume
 from Logic.determinare_pret_maxim_clasa import determinare_pret_maxim_clasa
 from Logic.ieftiniri import ieftiniri
 from Logic.modificare_clasa import modificare_clasa
@@ -14,6 +15,8 @@ def menu():
     print("5. Ieftinirea tuturor rezervărilor la care s-a făcut checkin cu un procentaj citit. ")
     print("6. Determinarea prețului maxim pentru fiecare clasă.")
     print("7. Ordonarea rezervărilor descrescător după preț. ")
+    print("8. Afișarea sumelor prețurilor pentru fiecare nume.")
+    print("9. Undo. ")
     print("a. Afiseaza rezervari")
     print("x. Iesire")
 
@@ -24,13 +27,16 @@ def ui_adaugare(lista):
     :param lista: lista
     :return: lista in urma adaugarii
     """
-
-    id = input("Dati id-ul rezervarii ")
-    nume = input("Dati numele ")
-    clasa = input("Ce clasa este ? ")
-    pret = float(input("Care este pretul ? "))
-    checkin = input("S-a facut checkin-ul? (Da/Nu) ")
-    return adauga_rezervare(id, nume, clasa, pret, checkin, lista)
+    try:
+        id = input("Dati id-ul rezervarii ")
+        nume = input("Dati numele ")
+        clasa = input("Ce clasa este ? ")
+        pret = float(input("Care este pretul ? "))
+        checkin = input("S-a facut checkin-ul? (Da/Nu) ")
+        return adauga_rezervare(id, nume, clasa, pret, checkin, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def ui_stergere(lista):
@@ -39,8 +45,12 @@ def ui_stergere(lista):
     :param lista: lista
     :return: lista in urma stergerii
     """
-    id = input("Dati id-ul listei pe care doriti sa o stergeti ")
-    return sterge_rezervare(id, lista)
+    try:
+        id = input("Dati id-ul rezervarii pe care doriti sa o stergeti ")
+        return sterge_rezervare(id, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def ui_modificare(lista):
@@ -49,13 +59,16 @@ def ui_modificare(lista):
     :param lista: lista
     :return: lista in urma modificarii unei rezervari
     """
-
-    id = input("Dati id-ul rezervarii pe care doriti sa o modificati ")
-    nume = input("Dati noul nume ")
-    clasa = input("Dati noua clasa ")
-    pret = float(input("Dati noul pret "))
-    checkin = input("S-a realizat checkinul?(Da/Nu) ")
-    return modifica_rezervare(id, nume, clasa, pret, checkin, lista)
+    try:
+        id = input("Dati id-ul rezervarii pe care doriti sa o modificati ")
+        nume = input("Dati noul nume ")
+        clasa = input("Dati noua clasa ")
+        pret = float(input("Dati noul pret "))
+        checkin = input("S-a realizat checkinul?(Da/Nu) ")
+        return modifica_rezervare(id, nume, clasa, pret, checkin, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def show_all(lista):
@@ -75,9 +88,12 @@ def ui_ieftinire(lista):
     :param lista: lista
     :return: rezervarile in urma ieftinirilor
     """
-
-    procentaj = float(input("Cu cat la suta vreti sa se reduca pretul rezervarilor cu checkin? "))
-    return ieftiniri(procentaj, lista)
+    try:
+        procentaj = float(input("Cu cat la suta vreti sa se reduca pretul rezervarilor cu checkin? "))
+        return ieftiniri(procentaj, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
 
 def ui_modificare_clasa(lista):
@@ -98,12 +114,10 @@ def ui_determinare_pret_maxim_clasa(lista):
     :param lista: lista
     :return: None (doar afiseaza)
     """
-
-    maxim_economy, maxim_economy_plus, maxim_business = determinare_pret_maxim_clasa(lista)
-    print("Pretul maxim la clasa economy este " + str(maxim_economy))
-    print("Pretul maxim la clasa economy_plus este " + str(maxim_economy_plus))
-    print("Pretul maxim la clasa business este " + str(maxim_business))
-
+    maxim_cls = determinare_pret_maxim_clasa(lista)
+    for clasa in maxim_cls:
+        print("Clasa {} are pretul cel mai mare de : {}".format(clasa,
+                                                                maxim_cls[clasa]))
     return None
 
 
@@ -115,6 +129,19 @@ def ui_ordonare(lista):
     """
 
     return ordonare(lista)
+
+
+def ui_afisare_suma_preturilor_fiecare_nume(lista):
+    """
+    Functia afiseaza pentru fiecare nume suma preturilor
+    :param lista: lista
+    :return: None (doar afiseaza)
+    """
+
+    suma = afisare_suma_preturilor_fiecare_nume(lista)
+    for nume in suma:
+        print("{} are suma de {}". format(nume,
+                                          suma[nume]))
 
 
 def meniu(lista):
@@ -135,6 +162,10 @@ def meniu(lista):
             ui_determinare_pret_maxim_clasa(lista)
         elif optiune == "7":
             lista = ui_ordonare(lista)
+        elif optiune == "8":
+            ui_afisare_suma_preturilor_fiecare_nume(lista)
+        elif optiune == "9":
+            print("Functionalitate in lucru ")
         elif optiune == "a":
             show_all(lista)
         elif optiune == "x":
@@ -142,4 +173,3 @@ def meniu(lista):
             break
         else:
             print("Optiune gresita, alege din nou ")
-

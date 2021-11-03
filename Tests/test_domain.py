@@ -8,6 +8,7 @@ def test_rezervare():
     assert get_clasa(rezervare) == "business"
     assert get_pret(rezervare) == 1000
     assert get_checkin(rezervare) == "Da"
+    assert get_all(rezervare) == ("1", "Marcel", "business", 1000, "Da")
 
     id, nume, clasa, pret, checkin = get_all(rezervare)
     assert id == "1"

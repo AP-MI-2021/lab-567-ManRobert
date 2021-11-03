@@ -1,4 +1,4 @@
-from Domain.rezervare import get_pret, to_string
+from Domain.rezervare import get_pret
 
 
 def ordonare(lista):

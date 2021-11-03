@@ -12,4 +12,3 @@ def test_modificare_clasa():
     assert get_clasa(lista[1]) == "economy plus"
     lista = modificare_clasa("Adrian", lista)
     assert get_clasa(lista[1]) == "business"
-

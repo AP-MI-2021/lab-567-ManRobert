@@ -4,23 +4,16 @@ from Domain.rezervare import get_clasa, get_pret
 def determinare_pret_maxim_clasa(lista):
     """
     Functia determina pretul maxim pentru fiecare clasa
-    :param lista: lsita
-    :return: cele 3 maxime
+    :param lista: lista
+    :return: dictionar ce contine in cele 3 chei maximele
     """
-
-    maxim_economy = 0
-    maxim_economy_plus = 0
-    maxim_business = 0
-
+    maxim_cls = {}
     for rezervare in lista:
-        if get_clasa(rezervare) == "economy":
-            if maxim_economy < get_pret(rezervare):
-                maxim_economy = get_pret(rezervare)
-        elif get_clasa(rezervare) == "economy plus":
-            if maxim_economy_plus < get_pret(rezervare):
-                maxim_economy_plus = get_pret(rezervare)
+        cls = get_clasa(rezervare)
+        pretul = get_pret(rezervare)
+        if cls in maxim_cls:
+            if pretul > maxim_cls[cls]:
+                maxim_cls[cls] = pretul
         else:
-            if maxim_business < get_pret(rezervare):
-                maxim_business = get_pret(rezervare)
-
-    return maxim_economy, maxim_economy_plus, maxim_business
+            maxim_cls[cls] = pretul
+    return maxim_cls

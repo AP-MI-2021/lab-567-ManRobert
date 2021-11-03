@@ -17,7 +17,7 @@ def modificare_clasa(nume_citit, lista):
             elif get_clasa(rezervare) == "economy plus":
                 noua_clasa = "business"
             else:
-                print("Rezervarea " + to_string(rezervare) + " este deja la cea mai superioara clasa ")
+                print("Rezervarea " + to_string(rezervare) + ", este deja la cea mai superioara clasa ")
                 noua_clasa = get_clasa(rezervare)
 
             id, nume, clasa, pret, checkin = get_all(rezervare)

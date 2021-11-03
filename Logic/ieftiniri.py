@@ -8,7 +8,10 @@ def ieftiniri(procentaj, lista):
     :param lista: lista
     :return: lista cu reduceri aplicate(daca a fost cazul)
     """
-
+    if procentaj > 100:
+        raise ValueError("Nu se pot face reduceri mai mari de 100% ")
+    if procentaj < 0:
+        raise ValueError("Procentajul nu trebuie sa fie mai mic decat 0 ")
     lista_noua = []
     for rezervare in lista:
         if get_checkin(rezervare) == "Da":
