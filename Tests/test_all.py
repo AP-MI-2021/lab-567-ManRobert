@@ -5,6 +5,7 @@ from Tests.test_CRUD import test_adauga_rezervare, test_sterge_rezervare, test_m
 from Tests.test_ieftiniri import test_ieftiniri
 from Tests.test_modificare_clasa import test_modificare_clasa
 from Tests.test_ordonare import test_ordonare
+from Tests.test_undo_redo_console import test_undo_redo_console
 
 
 def test_all():
@@ -17,3 +18,4 @@ def test_all():
     test_determinare_pret_maxim_clasa()
     test_ordonare()
     test_afisare_suma_preturilor_fiecare_nume()
+    test_undo_redo_console()

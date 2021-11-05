@@ -1,22 +1,26 @@
 from Tests.test_all import test_all
+from UI.command_line_console import command_line_console
 from UI.console import meniu
 
 
 # link pentru Asana : https://app.asana.com/0/home/1201299275391771
-from command_line_console import command_line_console
 
 
 def main():
     lista = []
     test_all()
+    undo_list = []
+    redo_list = []
     print("Toate functiile de calcul au trecut testele ")
     while True:
-        optiune = input("Pentru meniu tastati 1, pentru consola de comenzi, tastati 2;"
-                        " Pentru a inchide tastati x ")
+        print("Pentru meniu tastati 1 ")
+        print("Pentru consola de comenzi tastati 2 ")
+        print("Pentru a inchide tastati x ")
+        optiune = input()
         if optiune == "1":
-            meniu(lista)
+            meniu(lista, undo_list, redo_list)
         elif optiune == "2":
-            command_line_console(lista)
+            lista = command_line_console(lista, undo_list, redo_list)
         elif optiune == "x":
             break
         else:

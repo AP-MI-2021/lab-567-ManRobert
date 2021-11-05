@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from Domain.rezervare import get_pret
 
 
@@ -7,14 +9,15 @@ def ordonare(lista):
     :param lista: lista
     :return: rezervarile ordonate descrescator
     """
-
+    lista_noua = []
+    lista_noua = deepcopy(lista)
     auxiliar = []
-    for i in range(0, len(lista)-1):
-        for j in range(i+1, len(lista)):
+    for i in range(0, len(lista_noua)-1):
+        for j in range(i+1, len(lista_noua)):
 
-            if get_pret(lista[i]) < get_pret(lista[j]):
-                auxiliar = lista[j]
-                lista[j] = lista[i]
-                lista[i] = auxiliar
+            if get_pret(lista_noua[i]) < get_pret(lista_noua[j]):
+                auxiliar = lista_noua[j]
+                lista_noua[j] = lista_noua[i]
+                lista_noua[i] = auxiliar
 
-    return lista
+    return lista_noua
