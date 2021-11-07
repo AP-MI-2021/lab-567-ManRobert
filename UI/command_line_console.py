@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from Logic.CRUD import adauga_rezervare, sterge_rezervare, modifica_rezervare
 from UI.console import show_all
 
@@ -37,26 +39,29 @@ def command_line_console(lista, undo_list, redo_list):
                         clasa = comanda_separata[3]
                         pret = float(comanda_separata[4])
                         checkin = comanda_separata[5]
+                        rezultat = adauga_rezervare(id, nume, clasa, pret, checkin, lista)
                         undo_list.append(lista)
                         redo_list.clear()
-                        lista = adauga_rezervare(id, nume, clasa, pret, checkin, lista)
+                        lista = deepcopy(rezultat)
                     elif comanda_separata[0] == "delete":
+                        id = comanda_separata[1]
+                        rezultat = sterge_rezervare(id, lista)
                         undo_list.append(lista)
                         redo_list.clear()
-                        id = comanda_separata[1]
-                        lista = sterge_rezervare(id, lista)
+                        lista = deepcopy(rezultat)
                         print("Au fost sterse date ")
                     elif comanda_separata[0] == "update":
                         if len(comanda_separata) != 6:
                             raise ValueError("Trebuie sa introduceti exact 5 date! ")
-                        undo_list.append(lista)
-                        redo_list.clear()
                         id = comanda_separata[1]
                         nume = comanda_separata[2]
                         clasa = comanda_separata[3]
                         pret = float(comanda_separata[4])
                         checkin = comanda_separata[5]
-                        lista = modifica_rezervare(id, nume, clasa, pret, checkin, lista)
+                        rezultat = modifica_rezervare(id, nume, clasa, pret, checkin, lista)
+                        undo_list.append(lista)
+                        redo_list.clear()
+                        lista = deepcopy(rezultat)
                         print("Au fost modificate date")
                     elif comanda_separata[0] == "showall":
                         show_all(lista)
